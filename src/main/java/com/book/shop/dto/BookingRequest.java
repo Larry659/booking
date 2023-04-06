@@ -5,15 +5,17 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 @Data
-public class BookingRequest {
+public class BookingRequest implements Serializable {
 
     private String name;
 
+    private String email;
     private String lastName;
 
     private String phone;
 
-    private LocalDateTime appointmentDate;
+    private String appointmentDate;
 }

@@ -2,11 +2,14 @@ package com.book.shop.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Table( name = "booking")
 public class Bookings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +23,14 @@ public class Bookings {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "email")
+
+    private String email;
+
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "appointment_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime appointmentDate;
+    private LocalDate appointmentDate;
 }
