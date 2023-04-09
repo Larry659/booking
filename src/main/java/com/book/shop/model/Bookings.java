@@ -2,10 +2,8 @@ package com.book.shop.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -31,6 +29,6 @@ public class Bookings {
     private String phone;
 
     @Column(name = "appointment_date")
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate appointmentDate;
 }

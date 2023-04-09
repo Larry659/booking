@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface AccountService {
     ResponseEntity createAccount(AccountRequest payload);
-    ResponseEntity updatedAccount(UUID uuid,AccountRequest load);
+    ResponseEntity updatedAccount(String uuid,AccountRequest load);
     ResponseEntity listAccounts();
-    ResponseEntity deleteAccount(UUID uuid);
+    ResponseEntity deleteAccount(String uuid);
 }

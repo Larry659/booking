@@ -4,6 +4,7 @@ import com.book.shop.model.Bookings;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+
 import java.util.List;
 
 public interface BookingRepo extends JpaRepository< Bookings,Long> {
