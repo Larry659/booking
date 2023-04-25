@@ -4,6 +4,7 @@ import com.book.shop.dto.AccountRequest;
 import com.book.shop.dto.AccountResponse;
 import com.book.shop.enums.AccountType;
 import com.book.shop.exception.DuplicateRecordException;
+import com.book.shop.exception.RecordNotFoundException;
 import com.book.shop.mapper.Mapper;
 import com.book.shop.model.Accounts;
 import com.book.shop.repo.AccountRepo;
@@ -85,7 +86,17 @@ public class AccountServiceImpl implements AccountService {
     public ResponseEntity deleteAccount(String uuid) {
 
        Optional<Accounts> account = accountRepo.findById(uuid);
-       accountRepo.delete(account.get());
-       return ResponseEntity.ok("Successfully deleted");
+       if(account.isPresent()){
+           accountRepo.delete(account.get());
+           return ResponseEntity.ok("record deleted successfully");
+       }else
+           throw new RecordNotFoundException("record with id " + account.get().getId());
+
+
+
+//      account.ifPresentOrElse((acct)->{accountRepo.delete(acct);},
+//    throw new RecordNotFoundException("record with this id not found");
+//
+
     }
 }

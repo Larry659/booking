@@ -22,7 +22,8 @@ public class Bookings {
     private String lastName;
 
     @Column(name = "email")
-
+//    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+//    @NotEmpty(message = "Email cannot be empty")
     private String email;
 
     @Column(name = "phone")
@@ -31,4 +32,7 @@ public class Bookings {
     @Column(name = "appointment_date")
 //    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate appointmentDate;
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Accounts account;
 }

@@ -4,7 +4,9 @@ import com.book.shop.dto.BookingRequest;
 import com.book.shop.model.Bookings;
 import com.book.shop.repo.BookingRepo;
 import com.book.shop.service.BookingService;
+import com.book.shop.service.MailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +21,24 @@ import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BookingServiceImpl implements BookingService {
     private  final BookingRepo bookingRepo;
+    private final MailService mailService;
     @Override
     public ResponseEntity addBooking(BookingRequest payload) {
-               if(payload.getLastName()!= "" && payload.getName() != "" && payload.getPhone() != "" && patternMatches(payload.getEmail())){
+               if(!Objects.equals(payload.getLastName(), "") && !Objects.equals(payload.getName(), "") && !Objects.equals(payload.getPhone(), "") && patternMatches_(payload.getEmail())){
                    Bookings bookings = new Bookings();
                    bookings.setName(payload.getName());
                    bookings.setLastName(payload.getLastName());
                    bookings.setPhone(payload.getPhone());
+                   bookings.setEmail(payload.getEmail());
                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                    //convert String to LocalDate
                    bookings.setAppointmentDate(LocalDate.parse(payload.getAppointmentDate(),formatter));
+                   log.info("The booking is {}:",bookings);
                    bookingRepo.save(bookings);
+                   mailService.sendMailForBooking(payload);
                    return ResponseEntity.ok("new bookings with  saved");
                }
 
@@ -88,7 +95,11 @@ public class BookingServiceImpl implements BookingService {
         List<Bookings> bookingsList = bookingRepo.fetchAllBookingsForTheMonth();
         return ResponseEntity.ok(bookingsList);
     }
+    private static final Pattern EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
+    public static boolean patternMatches_(String s) {
+        return EMAIL.matcher(s).matches();
+    }
     public static boolean patternMatches(String emailAddress) {
          String regexPattern ="^(.+)@(\\S+) $";
         return Pattern.compile(regexPattern)

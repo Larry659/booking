@@ -21,6 +21,9 @@ public class Accounts {
     private String lastName;
     @Column(name = "gender")
     private String gender;
+    @Column(name = "user_name")
+    private String userName;
+
     @Column(name = "email")
     private String email;
     @Column(name = "password")
@@ -33,5 +36,6 @@ public class Accounts {
 
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dateCreated;
-
+@OneToOne(mappedBy = "account")
+    private Bookings bookings;
 }
