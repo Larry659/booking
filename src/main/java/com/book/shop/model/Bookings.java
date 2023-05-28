@@ -3,10 +3,11 @@ package com.book.shop.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
+@Table( name = "booking")
 public class Bookings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +21,18 @@ public class Bookings {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "email")
+//    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+//    @NotEmpty(message = "Email cannot be empty")
+    private String email;
+
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "appointment_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime appointmentDate;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDate appointmentDate;
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Accounts account;
 }
