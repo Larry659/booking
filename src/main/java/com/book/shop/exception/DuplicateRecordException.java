@@ -1,8 +1,12 @@
 package com.book.shop.exception;
 
-public class DuplicateRecordException extends RuntimeException {
-    private String message;
 
-    public DuplicateRecordException(String record_already_exist) {
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+public class DuplicateRecordException extends RuntimeException {
+
+    public DuplicateRecordException(String message) {
+        super(message);
     }
 }

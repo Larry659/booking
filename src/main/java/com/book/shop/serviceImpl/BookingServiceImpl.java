@@ -2,7 +2,7 @@ package com.book.shop.serviceImpl;
 
 import com.book.shop.dto.BookingRequest;
 import com.book.shop.model.Bookings;
-import com.book.shop.repo.BookingRepo;
+import com.book.shop.repo.BookingRepository;
 import com.book.shop.service.BookingService;
 import com.book.shop.service.MailService;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +21,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 @Slf4j
 public class BookingServiceImpl implements BookingService {
-    private  final BookingRepo bookingRepo;
+    private  final BookingRepository bookingRepository;
     private final MailService mailService;
     @Override
     public ResponseEntity addBooking(BookingRequest payload) {
@@ -37,7 +35,7 @@ public class BookingServiceImpl implements BookingService {
                    //convert String to LocalDate
                    bookings.setAppointmentDate(LocalDate.parse(payload.getAppointmentDate(),formatter));
                    log.info("The booking is {}:",bookings);
-                   bookingRepo.save(bookings);
+                   bookingRepository.save(bookings);
                    mailService.sendMailForBooking(payload);
                    return ResponseEntity.ok("new bookings with  saved");
                }
@@ -50,7 +48,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public ResponseEntity updateBooking(Long id,BookingRequest payload) {
-       Optional<Bookings> bookingsOptional = bookingRepo.findById(id);
+       Optional<Bookings> bookingsOptional = bookingRepository.findById(id);
        bookingsOptional.ifPresent((booking)->{
            if(Objects.nonNull(booking.getName()) && !"".equalsIgnoreCase(booking.getName())){
                booking.setName(payload.getName());
@@ -70,29 +68,29 @@ public class BookingServiceImpl implements BookingService {
                //convert String to LocalDate
                booking.setAppointmentDate(LocalDate.parse(payload.getAppointmentDate(),formatter));
            }
-           bookingRepo.save(booking);
+           bookingRepository.save(booking);
        });
        return ResponseEntity.ok("Booking successfully updated");
     }
 
     @Override
     public ResponseEntity getBookings() {
-       List<Bookings> bookingsList = bookingRepo.findAll();
+       List<Bookings> bookingsList = bookingRepository.findAll();
        return ResponseEntity.ok(bookingsList);
     }
 
     @Override
     public ResponseEntity deleteBookings(Long id) {
-       Optional<Bookings> optionalBookings = bookingRepo.findById(id);
+       Optional<Bookings> optionalBookings = bookingRepository.findById(id);
        optionalBookings.ifPresent((booking)->{
-           bookingRepo.delete(booking);
+           bookingRepository.delete(booking);
        });
       return ResponseEntity.ok("Record deleted successfully");
     }
 
     @Override
     public ResponseEntity getBookingPerMonth() {
-        List<Bookings> bookingsList = bookingRepo.fetchAllBookingsForTheMonth();
+        List<Bookings> bookingsList = bookingRepository.fetchAllBookingsForTheMonth();
         return ResponseEntity.ok(bookingsList);
     }
     private static final Pattern EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

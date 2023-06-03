@@ -2,6 +2,7 @@ package com.book.shop.model;
 
 import com.book.shop.enums.AccountType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,33 +10,60 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table( name = "accounts")
+@Table(name = "accounts")
 public class Accounts {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-//    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "last_name")
-    private String lastName;
-    @Column(name = "gender")
-    private String gender;
-    @Column(name = "user_name")
-    private String userName;
 
-    @Column(name = "email")
+    @NotBlank
+    @NotEmpty
+    @Min(value = '2')
+    private String firstName;
+
+    @NotBlank
+    @NotEmpty
+    @Min(value = '2')
+    private String lastName;
+
+    @NotBlank
+    @NotEmpty
+    private String gender;
+
+    @Positive
+    @NotBlank
+    @NotEmpty
+    private Integer age;
+
+    @NotBlank
+    @NotEmpty
+    @Column(unique = true)
+    @Min(value = '5')
+    private String username;
+
+    @Email
+    @NotEmpty
+    @NotEmpty
+    @Column(unique = true)
     private String email;
-    @Column(name = "password")
+
+    @NotEmpty
+    @NotBlank
+    @Min(value = '8')
     private String password;
-    @Column(name = "phone")
+
+    @NotEmpty
+    @NotBlank
     private String phone;
-    @Column(name = "account_type")
+
+    private String roles;
+    @NotEmpty
+    @NotBlank
     private String accountType;
-    @Column(name = "date_created")
 
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dateCreated;
-@OneToOne(mappedBy = "account")
+
+    @OneToOne(mappedBy = "account")
     private Bookings bookings;
 }

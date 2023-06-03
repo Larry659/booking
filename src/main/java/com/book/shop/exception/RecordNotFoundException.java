@@ -1,8 +1,11 @@
 package com.book.shop.exception;
 
-public class RecordNotFoundException extends RuntimeException {
-    private String message;
+import lombok.NoArgsConstructor;
 
-    public RecordNotFoundException(String record_already_exist) {
+@NoArgsConstructor
+public class RecordNotFoundException extends RuntimeException {
+
+    public RecordNotFoundException(String message) {
+        super(message);
     }
 }

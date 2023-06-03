@@ -7,33 +7,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value ="/booking")
+@RequestMapping(value ="/bookings")
 @RequiredArgsConstructor
 public class BookingRoute {
     private final BookingService bookingService;
 
-    @PostMapping("/add")
-    ResponseEntity addBooking(@RequestBody BookingRequest payload) {
+    @PostMapping("")
+    ResponseEntity<?> addBooking(@RequestBody BookingRequest payload) {
         return bookingService.addBooking(payload);
     }
 
-    @PostMapping("/update")
-    ResponseEntity updateBooking(@RequestParam Long id, @RequestBody BookingRequest payload) {
+    @PutMapping("/{id}")
+    ResponseEntity<?> updateBooking(@PathVariable Long id, @RequestBody BookingRequest payload) {
         return bookingService.updateBooking(id, payload);
     }
 
-    @GetMapping("/fetch")
-    ResponseEntity getBookings() {
+    @GetMapping("")
+    ResponseEntity<?> getBookings() {
         return bookingService.getBookings();
     }
 
-    @DeleteMapping("/delete")
-    ResponseEntity deleteBooking(Long id) {
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deleteBooking(@PathVariable Long id) {
         return bookingService.deleteBookings(id);
     }
 
-    @GetMapping("/booking-perMonth")
-    ResponseEntity getBookingForThisMonth() {
+    @GetMapping("/booking-per-month")
+    ResponseEntity<?> getBookingForThisMonth() {
         return bookingService.getBookingPerMonth();
     }
 }

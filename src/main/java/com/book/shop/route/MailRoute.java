@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/mail")
+@RequestMapping("/mails")
 @RequiredArgsConstructor
 public class MailRoute {
     private final MailService mailService;

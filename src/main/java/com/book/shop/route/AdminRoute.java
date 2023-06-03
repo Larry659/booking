@@ -6,30 +6,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
-
-@RequestMapping(value ="/account")
-
+@RequestMapping(value ="/admin/accounts")
 @RequiredArgsConstructor
-public class AccoutRoute {
+public class AdminRoute {
     private final AccountService accountService;
 
-    @PostMapping("/add")
-    ResponseEntity addAccount(@RequestBody AccountRequest payload) {
+    @PostMapping("")
+    ResponseEntity<?> addAccount(@RequestBody AccountRequest payload) {
         return accountService.createAccount(payload);
     }
-    @PostMapping("/update")
-    ResponseEntity updateAccount(@RequestParam String id, @RequestBody AccountRequest payload) {
+    @PutMapping("/{id}")
+    ResponseEntity<?> updateAccount(@PathVariable String id, @RequestBody AccountRequest payload) {
         return accountService.updatedAccount(id,payload);
     }
-    @GetMapping("/fetch")
-    ResponseEntity getAccount() {
+    @GetMapping("")
+    ResponseEntity<?> getAccount() {
         return accountService.listAccounts();
     }
-    @DeleteMapping("/delete")
-    ResponseEntity deleteAccount(String id) {
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deleteAccount(@PathVariable String id) {
         return accountService.deleteAccount(id);
     }
 }
