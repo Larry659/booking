@@ -32,13 +32,13 @@ public class AccountServiceImpl implements AccountService {
         Optional<Accounts> acct = accountRepo.findAccountsByEmail(payload.getEmail());
         if(acct.isEmpty()&& !acct.isPresent()){
             Accounts account = new Accounts();
-                account.setName(payload.getName());
+                account.setFirstName(payload.getName());
             account.setLastName(payload.getLastName());
             account.setEmail(payload.getEmail());
             account.setPassword(payload.getPassword());
             account.setGender(payload.getGender());
             account.setPhone(payload.getPhone());
-            account.setAccountType(AccountType.USER.label);
+            account.setAccountType(AccountType.USER);
             account.setDateCreated(LocalDateTime.now());
             Accounts save = accountRepo.save(account);
             log.info("Saved Account: {}", save );
@@ -53,8 +53,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseEntity updatedAccount(String uuid,AccountRequest load) {
         Accounts acct = accountRepo.findById(uuid).get();
-            if(Objects.nonNull(acct.getName()) && !"".equalsIgnoreCase(acct.getName())){
-                acct.setName(load.getName());
+            if(Objects.nonNull(acct.getFirstName()) && !"".equalsIgnoreCase(acct.getFirstName())){
+                acct.setFirstName(load.getName());
             }
         if(Objects.nonNull(acct.getLastName()) && !"".equalsIgnoreCase(acct.getLastName() )){
             acct.setLastName(load.getLastName());

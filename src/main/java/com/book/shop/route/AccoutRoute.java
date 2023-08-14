@@ -16,10 +16,10 @@ import java.util.UUID;
 public class AccoutRoute {
     private final AccountService accountService;
 
-    @PostMapping("/add")
-    ResponseEntity addAccount(@RequestBody AccountRequest payload) {
-        return accountService.createAccount(payload);
-    }
+//    @PostMapping("/add")
+//    ResponseEntity addAccount(@RequestBody AccountRequest payload) {
+//        return accountService.createAccount(payload);
+//    }
     @PostMapping("/update")
     ResponseEntity updateAccount(@RequestParam String id, @RequestBody AccountRequest payload) {
         return accountService.updatedAccount(id,payload);

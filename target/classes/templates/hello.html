@@ -2,7 +2,7 @@
 <html
         xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
->
+ lang="en">
 <head>
     <title></title>
     <!--[if !mso]><!-->
@@ -398,7 +398,7 @@
                                                         <p>
                                                             Thanks for being awesome!<br />
                                                             We have received your booking appointment which is scheduled to hold on
-                                                            ${appointment_date} and would like to thank you for trusting us.
+                                                            <span th:text="${appointment_date}"></span>and would like to thank you for trusting us.
                                                         </p>
 
                                                         <br>
