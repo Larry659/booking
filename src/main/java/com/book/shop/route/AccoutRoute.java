@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RestController
 
-@RequestMapping(value ="/account")
+@RequestMapping(value ="/api/v1/account")
 
 @RequiredArgsConstructor
 public class AccoutRoute {
@@ -29,7 +29,7 @@ public class AccoutRoute {
         return accountService.listAccounts();
     }
     @DeleteMapping("/delete")
-    ResponseEntity deleteAccount(String id) {
+    ResponseEntity deleteAccount(@RequestParam String id) {
         return accountService.deleteAccount(id);
     }
 }

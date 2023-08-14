@@ -13,20 +13,14 @@ import java.time.LocalDateTime;
 public class AccountRequest {
 
 
-    private String name;
+    private String firstName;
 
     private String lastName;
-
-    private String gender;
 
     private String email;
 
     private String password;
 
     private String phone;
-
-
-
-
 
 }

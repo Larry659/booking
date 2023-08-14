@@ -12,11 +12,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountResponse implements Serializable {
-    private String name;
+    private String firstName;
 
     private String lastName;
-
-    private String gender;
 
     private String email;
 

@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
             account.setLastName(payload.getLastName());
             account.setEmail(payload.getEmail());
             account.setPassword(payload.getPassword());
-            account.setGender(payload.getGender());
+//            account.setGender(payload.getGender());
             account.setPhone(payload.getPhone());
             account.setAccountType(AccountType.USER);
             account.setDateCreated(LocalDateTime.now());

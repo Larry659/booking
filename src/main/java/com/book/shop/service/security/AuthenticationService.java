@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -45,6 +47,8 @@ public class AuthenticationService {
                 .lastName(request.getLastName())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
+                .dateCreated(LocalDateTime.now())
+                .userName(request.getUserName())
                 .accountType(AccountType.USER)
                 .build();
         accountRepo.save(user);

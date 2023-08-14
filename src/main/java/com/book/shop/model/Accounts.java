@@ -30,8 +30,8 @@ public class Accounts implements UserDetails {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "gender")
-    private String gender;
+//    @Column(name = "gender")
+//    private String gender;
     @Column(name = "user_name")
     private String userName;
 
