@@ -23,9 +23,9 @@ import java.util.UUID;
 @Table( name = "accounts")
 public class Accounts implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "id")
-    private String id;
+    private Long id;
     @Column(name = "name")
     private String firstName;
     @Column(name = "last_name")
@@ -35,7 +35,7 @@ public class Accounts implements UserDetails {
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
     @Column(name = "password")
     private String password;

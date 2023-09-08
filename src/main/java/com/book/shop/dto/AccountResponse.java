@@ -13,15 +13,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AccountResponse implements Serializable {
     private String firstName;
-
     private String lastName;
-
     private String email;
-
-    private String password;
-
     private String phone;
-
+    private String accountType;
+    private String userName;
     private LocalDateTime dateCreated;
 
 }

@@ -13,27 +13,27 @@ public class BookingRoute {
     private final BookingService bookingService;
 
     @PostMapping("/add")
-    ResponseEntity addBooking(@RequestBody BookingRequest payload) {
+    ResponseEntity<?> addBooking(@RequestBody BookingRequest payload) {
         return bookingService.addBooking(payload);
     }
 
     @PostMapping("/update")
-    ResponseEntity updateBooking(@RequestParam Long id, @RequestBody BookingRequest payload) {
+    ResponseEntity<?> updateBooking(@RequestParam Long id, @RequestBody BookingRequest payload) {
         return bookingService.updateBooking(id, payload);
     }
 
     @GetMapping("/fetch")
-    ResponseEntity getBookings() {
+    ResponseEntity<?> getBookings() {
         return bookingService.getBookings();
     }
 
     @DeleteMapping("/delete")
-    ResponseEntity deleteBooking(Long id) {
+    ResponseEntity<?> deleteBooking(Long id) {
         return bookingService.deleteBookings(id);
     }
 
     @GetMapping("/booking-perMonth")
-    ResponseEntity getBookingForThisMonth() {
+    ResponseEntity<?> getBookingForThisMonth() {
         return bookingService.getBookingPerMonth();
     }
 }

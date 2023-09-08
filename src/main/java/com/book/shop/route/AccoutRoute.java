@@ -21,15 +21,15 @@ public class AccoutRoute {
 //        return accountService.createAccount(payload);
 //    }
     @PostMapping("/update")
-    ResponseEntity updateAccount(@RequestParam String id, @RequestBody AccountRequest payload) {
+    ResponseEntity<?> updateAccount(@RequestParam Long id, @RequestBody AccountRequest payload) {
         return accountService.updatedAccount(id,payload);
     }
     @GetMapping("/fetch")
-    ResponseEntity getAccount() {
+    ResponseEntity<?> getAccount() {
         return accountService.listAccounts();
     }
     @DeleteMapping("/delete")
-    ResponseEntity deleteAccount(@RequestParam String id) {
+    ResponseEntity<?> deleteAccount(@RequestParam Long id) {
         return accountService.deleteAccount(id);
     }
 }

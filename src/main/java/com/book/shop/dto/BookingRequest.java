@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @Data
 public class BookingRequest implements Serializable {
 
-    private String name;
+
 
     private String email;
-    private String lastName;
+
 
     private String phone;
 

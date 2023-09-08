@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.UUID;
 
 public interface AccountService {
-    ResponseEntity createAccount(AccountRequest payload);
-    ResponseEntity updatedAccount(String uuid,AccountRequest load);
-    ResponseEntity listAccounts();
-    ResponseEntity deleteAccount(String uuid);
+    ResponseEntity<?> createAccount(AccountRequest payload);
+    ResponseEntity<?> updatedAccount(Long id,AccountRequest load);
+    ResponseEntity<?> listAccounts();
+    ResponseEntity<?> deleteAccount(Long id);
 }

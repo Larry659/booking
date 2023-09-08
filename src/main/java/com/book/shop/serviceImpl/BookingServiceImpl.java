@@ -1,7 +1,11 @@
 package com.book.shop.serviceImpl;
 
 import com.book.shop.dto.BookingRequest;
+import com.book.shop.dto.BookingResponse;
+import com.book.shop.mapper.Mapper;
+import com.book.shop.model.Accounts;
 import com.book.shop.model.Bookings;
+import com.book.shop.repo.AccountRepo;
 import com.book.shop.repo.BookingRepo;
 import com.book.shop.service.BookingService;
 import com.book.shop.service.MailService;
@@ -25,21 +29,24 @@ import java.util.regex.Pattern;
 public class BookingServiceImpl implements BookingService {
     private  final BookingRepo bookingRepo;
     private final MailService mailService;
+    private final AccountRepo accountRepo;
     @Override
-    public ResponseEntity addBooking(BookingRequest payload) {
-               if(!Objects.equals(payload.getLastName(), "") && !Objects.equals(payload.getName(), "") && !Objects.equals(payload.getPhone(), "") && patternMatches_(payload.getEmail())){
+    public ResponseEntity<?> addBooking(BookingRequest payload) {
+        Accounts acct =accountRepo.findAccountsByEmail(payload.getEmail()).get();
+               if(!Objects.equals(acct.getLastName(), "") && !Objects.equals(acct.getFirstName(), "") && !Objects.equals(payload.getPhone(), "") && patternMatches_(payload.getEmail())){
                    Bookings bookings = new Bookings();
-                   bookings.setName(payload.getName());
-                   bookings.setLastName(payload.getLastName());
-                   bookings.setPhone(payload.getPhone());
+                   bookings.setName(acct.getFirstName());
+                   bookings.setLastName(acct.getLastName());
+                   bookings.setPhone(acct.getPhone());
                    bookings.setEmail(payload.getEmail());
+                   bookings.setAccount(acct);
                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                    //convert String to LocalDate
                    bookings.setAppointmentDate(LocalDate.parse(payload.getAppointmentDate(),formatter));
                    log.info("The booking is {}:",bookings);
                    bookingRepo.save(bookings);
                    mailService.sendMailForBooking(payload);
-                   return ResponseEntity.ok("new bookings with  saved");
+                   return ResponseEntity.ok("new booking saved");
                }
 
         else {
@@ -49,18 +56,13 @@ public class BookingServiceImpl implements BookingService {
 
 
     @Override
-    public ResponseEntity updateBooking(Long id,BookingRequest payload) {
+    public ResponseEntity<?> updateBooking(Long id,BookingRequest payload) {
        Optional<Bookings> bookingsOptional = bookingRepo.findById(id);
        bookingsOptional.ifPresent((booking)->{
-           if(Objects.nonNull(booking.getName()) && !"".equalsIgnoreCase(booking.getName())){
-               booking.setName(payload.getName());
-           }
-           if(Objects.nonNull(booking.getLastName()) && !"".equalsIgnoreCase(booking.getLastName())){
-               booking.setLastName(payload.getLastName());
-           }
            if(Objects.nonNull(booking.getEmail()) && !"".equalsIgnoreCase(booking.getEmail())){
                if (patternMatches(payload.getEmail()))
-               booking.setEmail(payload.getEmail());
+                booking.setEmail(payload.getEmail());
+
            }
            if(Objects.nonNull(booking.getPhone()) && !"".equalsIgnoreCase(booking.getPhone())){
                booking.setPhone(payload.getPhone());
@@ -76,9 +78,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public ResponseEntity getBookings() {
+    public ResponseEntity<?> getBookings() {
        List<Bookings> bookingsList = bookingRepo.findAll();
-       return ResponseEntity.ok(bookingsList);
+       List<BookingResponse> responseList = Mapper.convertList(bookingsList,BookingResponse.class);
+       log.info("This is the list of booking {}",responseList);
+       return ResponseEntity.ok(responseList);
     }
 
     @Override

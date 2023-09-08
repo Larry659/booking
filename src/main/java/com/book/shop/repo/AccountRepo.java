@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface AccountRepo extends JpaRepository<Accounts, String> {
+public interface AccountRepo extends JpaRepository<Accounts, Long> {
     @Query( value = "select * from accounts where email=:email",nativeQuery = true)
     Optional<Accounts> findAccountsByEmail(String email);
 
