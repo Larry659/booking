@@ -33,7 +33,7 @@ public class Accounts implements UserDetails {
 //    @Column(name = "gender")
 //    private String gender;
     @Column(name = "user_name")
-    private String userName;
+    private String appUserName;
 
     @Column(name = "email",unique = true)
     private String email;

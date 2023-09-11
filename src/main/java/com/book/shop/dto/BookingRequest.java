@@ -1,5 +1,6 @@
 package com.book.shop.dto;
 
+import com.book.shop.enums.ServiceType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 public class BookingRequest implements Serializable {
 
-
+    private ServiceType service;
 
     private String email;
 

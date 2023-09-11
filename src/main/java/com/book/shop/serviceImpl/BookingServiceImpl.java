@@ -39,6 +39,7 @@ public class BookingServiceImpl implements BookingService {
                    bookings.setLastName(acct.getLastName());
                    bookings.setPhone(acct.getPhone());
                    bookings.setEmail(payload.getEmail());
+                   bookings.setService(payload.getService());
                    bookings.setAccount(acct);
                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                    //convert String to LocalDate
@@ -86,18 +87,17 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public ResponseEntity deleteBookings(Long id) {
+    public ResponseEntity <?>deleteBookings(Long id) {
        Optional<Bookings> optionalBookings = bookingRepo.findById(id);
-       optionalBookings.ifPresent((booking)->{
-           bookingRepo.delete(booking);
-       });
+       optionalBookings.ifPresent(bookingRepo::delete);
       return ResponseEntity.ok("Record deleted successfully");
     }
 
     @Override
-    public ResponseEntity getBookingPerMonth() {
+    public ResponseEntity <?>getBookingPerMonth() {
         List<Bookings> bookingsList = bookingRepo.fetchAllBookingsForTheMonth();
-        return ResponseEntity.ok(bookingsList);
+        List<BookingResponse> responseList = Mapper.convertList(bookingsList,BookingResponse.class);
+        return ResponseEntity.ok(responseList);
     }
     private static final Pattern EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 

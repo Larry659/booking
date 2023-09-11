@@ -48,7 +48,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
                 .dateCreated(LocalDateTime.now())
-                .userName(request.getUserName())
+                .appUserName(request.getAppUserName())
                 .accountType(AccountType.USER)
                 .build();
         accountRepo.save(user);

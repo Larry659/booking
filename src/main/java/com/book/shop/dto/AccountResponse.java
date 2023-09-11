@@ -17,7 +17,7 @@ public class AccountResponse implements Serializable {
     private String email;
     private String phone;
     private String accountType;
-    private String userName;
+    private String appUserName;
     private LocalDateTime dateCreated;
 
 }

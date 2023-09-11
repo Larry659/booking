@@ -23,6 +23,6 @@ public class AccountRequest {
 
     private String phone;
 
-    private String userName;
+    private String appUserName;
 
 }

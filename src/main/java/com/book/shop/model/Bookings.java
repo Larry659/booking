@@ -1,5 +1,6 @@
 package com.book.shop.model;
 
+import com.book.shop.enums.ServiceType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,8 @@ public class Bookings {
     @Column(name = "last_name")
     private String lastName;
 
+    @Enumerated(EnumType.STRING)
+    private ServiceType service;
     @Column(name = "email")
 //    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
 //    @NotEmpty(message = "Email cannot be empty")
@@ -36,7 +39,7 @@ public class Bookings {
     private String phone;
 
     @Column(name = "appointment_date")
-//    @Temporal(TemporalType.TIMESTAMP)
+   @Temporal(TemporalType.DATE)
     private LocalDate appointmentDate;
     @OneToOne
     @JoinColumn(name = "account_id")

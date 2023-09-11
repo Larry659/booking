@@ -5,6 +5,7 @@ import com.book.shop.dto.AccountResponse;
 import com.book.shop.enums.AccountType;
 import com.book.shop.exception.DuplicateRecordException;
 import com.book.shop.exception.RecordNotFoundException;
+import com.book.shop.mapper.AccountConverter;
 import com.book.shop.mapper.Mapper;
 import com.book.shop.model.Accounts;
 import com.book.shop.repo.AccountRepo;
@@ -40,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
             account.setPhone(payload.getPhone());
             account.setAccountType(AccountType.USER);
             account.setDateCreated(LocalDateTime.now());
-            account.setUserName(payload.getUserName());
+            account.setAppUserName(payload.getAppUserName());
             Accounts save = accountRepo.save(account);
             log.info("Saved Account: {}", save );
         }else
@@ -70,7 +71,7 @@ public class AccountServiceImpl implements AccountService {
             acct.setPassword(load.getPassword());
         }
         if(Objects.nonNull(acct.getUsername()) && !"".equalsIgnoreCase(acct.getUsername() )){
-            acct.setUserName(load.getUserName());
+            acct.setAppUserName(load.getAppUserName());
         }
       Accounts ac = accountRepo.save(acct);
         log.info("Updated value :{}",ac);
@@ -81,14 +82,15 @@ public class AccountServiceImpl implements AccountService {
     public ResponseEntity<?> listAccounts() {
 
         List<Accounts> accountsList = accountRepo.findAll();
-        List<AccountResponse> responseList = Mapper.convertList(accountsList,AccountResponse.class);
+      List<AccountResponse> responseList = Mapper.convertList(accountsList,AccountResponse.class);
+        //List<AccountResponse> responseList = AccountConverter.convertToResponseList(accountsList);
         log.info("This is the responseList {}",responseList);
         return ResponseEntity.ok().body(responseList);
 
     }
 
     @Override
-    public ResponseEntity deleteAccount(Long id) {
+    public ResponseEntity<?> deleteAccount(Long id) {
 
        Optional<Accounts> account = accountRepo.findById(id);
        if(account.isPresent()){
