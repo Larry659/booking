@@ -1,12 +1,10 @@
 package com.book.shop.model;
 
-import com.book.shop.enums.AccountType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Data

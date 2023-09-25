@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookingRoute {
     private final BookingService bookingService;
 
-    @PostMapping("")
+    @PostMapping
     ResponseEntity<?> addBooking(@RequestBody BookingRequest payload) {
         return bookingService.addBooking(payload);
     }
@@ -22,7 +22,7 @@ public class BookingRoute {
         return bookingService.updateBooking(id, payload);
     }
 
-    @GetMapping("")
+    @GetMapping
     ResponseEntity<?> getBookings() {
         return bookingService.getBookings();
     }

@@ -4,15 +4,21 @@ import com.book.shop.dto.AccountRequest;
 import com.book.shop.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value ="/accounts")
 @RequiredArgsConstructor
+@PreAuthorize("hasAuthority('{ROLE_USER, ROLE_ADMIN}')")
 public class AccountRoute {
     private final AccountService accountService;
 
-    @PostMapping("")
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok().body("Welcome to the Booking Home Page");
+    }
+    @PostMapping
     ResponseEntity<?> addAccount(@RequestBody AccountRequest payload) {
         return accountService.createAccount(payload);
     }
@@ -20,7 +26,7 @@ public class AccountRoute {
     ResponseEntity<?> updateAccount(@PathVariable String id, @RequestBody AccountRequest payload) {
         return accountService.updatedAccount(id,payload);
     }
-    @GetMapping("")
+    @GetMapping
     ResponseEntity<?> getAccount() {
         return accountService.listAccounts();
     }

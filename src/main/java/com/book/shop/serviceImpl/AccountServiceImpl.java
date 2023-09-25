@@ -12,6 +12,7 @@ import com.book.shop.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
+    private final PasswordEncoder passwordEncoder;
     @Override
     public ResponseEntity<?> createAccount(AccountRequest payload) {
         Optional<Accounts> acct = accountRepository.findAccountsByEmail(payload.getEmail());
@@ -32,8 +34,9 @@ public class AccountServiceImpl implements AccountService {
             Accounts account = new Accounts();
                 account.setFirstName(payload.getFirstName());
             account.setLastName(payload.getLastName());
+            account.setUsername(payload.getUsername());
             account.setEmail(payload.getEmail());
-            account.setPassword(payload.getPassword());
+            account.setPassword(passwordEncoder.encode(payload.getPassword()));
             account.setGender(payload.getGender());
             account.setPhone(payload.getPhone());
             account.setAccountType(AccountType.USER.label);
