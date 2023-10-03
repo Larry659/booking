@@ -28,6 +28,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
     private final AccountRepo accountRepo;
+
+    public static void createPasswordReset(Accounts accounts, String passwordToken) {
+    }
+
     @Override
     public ResponseEntity<?> createAccount(AccountRequest payload) {
         Optional<Accounts> acct = accountRepo.findAccountsByEmail(payload.getEmail());
