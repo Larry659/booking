@@ -7,14 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 
 @RequestMapping(value ="/api/v1/account")
 
 @RequiredArgsConstructor
-public class AccoutRoute {
+public class AccountRoute {
     private final AccountService accountService;
 
 //    @PostMapping("/add")
