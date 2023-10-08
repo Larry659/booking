@@ -1,15 +1,16 @@
 package com.book.shop.service;
 
+import com.book.shop.dto.ApiResponse;
 import com.book.shop.dto.BookingRequest;
 import org.springframework.http.ResponseEntity;
 
 public interface BookingService {
-    ResponseEntity addBooking(BookingRequest payload);
-    ResponseEntity updateBooking(Long id,BookingRequest payload);
+    ApiResponse<?> addBooking(BookingRequest payload);
+    ApiResponse<?> updateBooking(Long id,BookingRequest payload);
 
-    ResponseEntity getBookings();
-    ResponseEntity deleteBookings(Long id);
+    ApiResponse<?> getBookings();
+    ApiResponse<?> deleteBookings(Long id);
 
-    ResponseEntity getBookingPerMonth();
+    ApiResponse<?> getBookingPerMonth();
 
 }

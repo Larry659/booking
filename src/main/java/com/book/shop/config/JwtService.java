@@ -20,8 +20,9 @@ public class JwtService {
 //    @Value("${SECRET}")
 //    private static String SECRET_KEY;
 
-    private static final String SECRET_KEY ="T4bV5qsMq6mY7yuU2+aO02hNMOQhvHDuJ0jutzEW9oTEwm+3EsRsp1vsvRjPxl35XXAg6H5/GJiwWkO4ogIi3PfVeepy02pzcuJNsN+zZwkVc7D2xRS2JXdO3Ww2+SgoGotaj2mLoPNImXbGkBeNYKwHWqb75KG9ME6ivNj/QbNfk4bxxcPDMeqyFhwza4cuvYla+6eZdy/H3i8M1PgYa+rPo00Y5AyFj6I3P2wW2O7utQ7H+2ZykbJ3rF8Ks5pNlLh5Ffs9iqHjLSIxVI2ASyVvzxtuYpMSpAm4FPU+yROgeAvWfw89RVbj8cne0U6e2ufu4Us+GBJ0d7bOSGnviXZExPzM2uSci2BwcjtrUi8=" ;
+    //private static final String SECRET_KEY ="T4bV5qsMq6mY7yuU2+aO02hNMOQhvHDuJ0jutzEW9oTEwm+3EsRsp1vsvRjPxl35XXAg6H5/GJiwWkO4ogIi3PfVeepy02pzcuJNsN+zZwkVc7D2xRS2JXdO3Ww2+SgoGotaj2mLoPNImXbGkBeNYKwHWqb75KG9ME6ivNj/QbNfk4bxxcPDMeqyFhwza4cuvYla+6eZdy/H3i8M1PgYa+rPo00Y5AyFj6I3P2wW2O7utQ7H+2ZykbJ3rF8Ks5pNlLh5Ffs9iqHjLSIxVI2ASyVvzxtuYpMSpAm4FPU+yROgeAvWfw89RVbj8cne0U6e2ufu4Us+GBJ0d7bOSGnviXZExPzM2uSci2BwcjtrUi8=" ;
 //https://generate-random.org/encryption-key-generator
+private static final String SECRET_KEY =  "CogpbEqBIrwd2Deiy1B+bHHEoMshtqZu+OBskAoo0YGftYYNpdVWdyVvowm9QAqg";
 
 
     public String extractUserEmail(String token) {

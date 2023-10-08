@@ -2,10 +2,10 @@ package com.book.shop.serviceImpl;
 
 import com.book.shop.dto.AccountRequest;
 import com.book.shop.dto.AccountResponse;
+import com.book.shop.dto.ApiResponse;
 import com.book.shop.enums.AccountType;
 import com.book.shop.exception.DuplicateRecordException;
 import com.book.shop.exception.RecordNotFoundException;
-import com.book.shop.mapper.AccountConverter;
 import com.book.shop.mapper.Mapper;
 import com.book.shop.model.Accounts;
 import com.book.shop.repo.AccountRepo;
@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.book.shop.dto.AppCode.ERROR_CODE;
+import static com.book.shop.dto.AppCode.OKAY;
+import static com.book.shop.dto.MessageUtil.*;
 
 
 @Service
@@ -57,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public ResponseEntity<?> updatedAccount(Long id,AccountRequest load) {
+    public ApiResponse<?> updatedAccount(Long id, AccountRequest load) {
         Accounts acct = accountRepo.findById(id).get();
             if(Objects.nonNull(acct.getFirstName()) && !"".equalsIgnoreCase(acct.getFirstName())){
                 acct.setFirstName(load.getFirstName());
@@ -79,27 +82,32 @@ public class AccountServiceImpl implements AccountService {
         }
       Accounts ac = accountRepo.save(acct);
         log.info("Updated value :{}",ac);
-        return ResponseEntity.ok("Account updated successfully");
+        return new ApiResponse<>(SUCCESS,OKAY,load);
     }
 
     @Override
-    public ResponseEntity<?> listAccounts() {
+    public ApiResponse<?> listAccounts() {
 
         List<Accounts> accountsList = accountRepo.findAll();
-      List<AccountResponse> responseList = Mapper.convertList(accountsList,AccountResponse.class);
-        //List<AccountResponse> responseList = AccountConverter.convertToResponseList(accountsList);
-        log.info("This is the responseList {}",responseList);
-        return ResponseEntity.ok().body(responseList);
+        if(!accountsList.isEmpty()){
+            List<AccountResponse> responseList = Mapper.convertList(accountsList,AccountResponse.class);
+            //List<AccountResponse> responseList = AccountConverter.convertToResponseList(accountsList);
+            log.info("This is the responseList {}",responseList);
+            return new ApiResponse<>(SUCCESS,OKAY,responseList);
 
+        }
+     else
+         return new ApiResponse<>(FAILED,ERROR_CODE);
     }
 
     @Override
-    public ResponseEntity<?> deleteAccount(Long id) {
+    public ApiResponse<?> deleteAccount(Long id) {
 
        Optional<Accounts> account = accountRepo.findById(id);
        if(account.isPresent()){
            accountRepo.delete(account.get());
-           return ResponseEntity.ok("record deleted successfully");
+           return new ApiResponse<>(DELETED,OKAY);
+
        }else
            throw new RecordNotFoundException("record with id " + account.get().getId());
 

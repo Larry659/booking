@@ -2,6 +2,7 @@ package com.book.shop.route;
 
 
 
+import com.book.shop.dto.ApiResponse;
 import com.book.shop.dto.auth.AuthenticationRequest;
 import com.book.shop.dto.auth.AuthenticationResponse;
 import com.book.shop.dto.auth.RegisterRequest;
@@ -33,13 +34,13 @@ public class AuthenticationController {
     private final PasswordResetTokenService passwordResetTokenService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthenticationResponse> register (@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.register(request));
+    public ApiResponse<AuthenticationResponse> register (@RequestBody RegisterRequest request) {
+        return authenticationService.register(request);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticate (@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok(authenticationService.login(request));
+    public ApiResponse<AuthenticationResponse> authenticate (@RequestBody AuthenticationRequest request){
+        return authenticationService.login(request);
     }
     @PostMapping("/logout")
     public ResponseEntity<?> signOut(){

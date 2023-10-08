@@ -1,5 +1,6 @@
 package com.book.shop.route;
 
+import com.book.shop.dto.ApiResponse;
 import com.book.shop.dto.BookingRequest;
 import com.book.shop.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -13,27 +14,27 @@ public class BookingRoute {
     private final BookingService bookingService;
 
     @PostMapping("/add")
-    ResponseEntity<?> addBooking(@RequestBody BookingRequest payload) {
+    ApiResponse<?> addBooking(@RequestBody BookingRequest payload) {
         return bookingService.addBooking(payload);
     }
 
     @PostMapping("/update")
-    ResponseEntity<?> updateBooking(@RequestParam Long id, @RequestBody BookingRequest payload) {
+    ApiResponse<?> updateBooking(@RequestParam Long id, @RequestBody BookingRequest payload) {
         return bookingService.updateBooking(id, payload);
     }
 
     @GetMapping("/fetch")
-    ResponseEntity<?> getBookings() {
+    ApiResponse<?> getBookings() {
         return bookingService.getBookings();
     }
 
     @DeleteMapping("/delete")
-    ResponseEntity<?> deleteBooking(Long id) {
+    ApiResponse<?> deleteBooking(Long id) {
         return bookingService.deleteBookings(id);
     }
 
     @GetMapping("/booking-perMonth")
-    ResponseEntity<?> getBookingForThisMonth() {
+    ApiResponse<?> getBookingForThisMonth() {
         return bookingService.getBookingPerMonth();
     }
 }

@@ -2,6 +2,7 @@ package com.book.shop.service.security;
 
 
 import com.book.shop.config.JwtService;
+import com.book.shop.dto.ApiResponse;
 import com.book.shop.dto.auth.AuthenticationRequest;
 import com.book.shop.dto.auth.AuthenticationResponse;
 import com.book.shop.dto.auth.RegisterRequest;
@@ -12,6 +13,7 @@ import com.book.shop.repo.AccountRepo;
 import com.book.shop.service.RefreshTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +26,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static com.book.shop.dto.AppCode.DUPLICATE;
+import static com.book.shop.dto.AppCode.OKAY;
+import static com.book.shop.dto.MessageUtil.FAILED;
+import static com.book.shop.dto.MessageUtil.SUCCESS;
 
 @Service
 @RequiredArgsConstructor
@@ -36,37 +44,50 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenService refreshTokenService;
 
-    public AuthenticationResponse login(AuthenticationRequest request) {
+    public ApiResponse<AuthenticationResponse> login(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
         var user = accountRepo.findAccountsByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("The User with this email not found"));
         var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder()
+        AuthenticationResponse auth = AuthenticationResponse.builder()
                 .token(jwtToken)
+                .accountType(user.getAccountType().toString())
                 .build();
+        return new ApiResponse<>(SUCCESS,OKAY,auth);
     }
 
-    public AuthenticationResponse register(RegisterRequest request) {
-        var user = Accounts
-                .builder()
-                .email(request.getEmail())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .phone(request.getPhone())
-                .dateCreated(LocalDateTime.now())
-                .appUserName(request.getAppUserName())
-                .accountType(AccountType.USER)
-                .build();
-        accountRepo.save(user);
+    public ApiResponse<AuthenticationResponse> register(RegisterRequest request) {
+     Optional<Accounts> acct =  accountRepo.findAccountsByEmail(request.getEmail());
+        if(acct.isEmpty()){
+            var user = Accounts
+                    .builder()
+                    .email(request.getEmail())
+                    .firstName(request.getFirstName())
+                    .lastName(request.getLastName())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .phone(request.getPhone())
+                    .dateCreated(LocalDateTime.now())
+                    .appUserName(request.getAppUserName())
+                    .accountType(AccountType.USER)
+                    .build();
+            accountRepo.save(user);
 
-        var jwtToken = jwtService.generateToken(user);
+            var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+            AuthenticationResponse auth = AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .build();
+            return new ApiResponse<>(SUCCESS,OKAY,auth);
+        }
+        else {
+            AuthenticationResponse auth = AuthenticationResponse.builder()
+                    .token("Already created")
+                    .build();
+            return new ApiResponse<>(FAILED,DUPLICATE,auth);
+        }
+
     }
 
 

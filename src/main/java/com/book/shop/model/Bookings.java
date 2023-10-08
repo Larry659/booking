@@ -28,8 +28,9 @@ public class Bookings {
     @Column(name = "last_name")
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    private ServiceType service;
+//    @Enumerated(EnumType.STRING)
+@Column(name = "service")
+    private String service;
     @Column(name = "email")
 //    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
 //    @NotEmpty(message = "Email cannot be empty")

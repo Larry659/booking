@@ -68,8 +68,8 @@ public class MailServiceImpl implements MailService {
            variables.put("full_name",acct.getFirstName() + " " + acct.getLastName());
            variables.put("last_name",acct.getLastName());
            variables.put("phone",payload.getPhone());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            variables.put("appointment_date",LocalDate.parse(payload.getAppointmentDate(),formatter));
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            variables.put("appointment_date",LocalDate.parse(payload.getAppointmentDate()));
             helper.setText(thymleafService.createContent( "hello.html",variables),true);
             helper.setFrom(fromEmail);
             helper.setSubject("Welcome Email");

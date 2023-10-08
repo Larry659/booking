@@ -1,0 +1,101 @@
+package com.book.shop.dto;
+
+public class MessageUtil {
+
+    public final static String DUPLICATE_LINKING = "Oops! This account has already been linked, please try with another account";
+    public final static String CARD_REQUIRED = "Oops, denied because your linked card is not valid. Link a valid card with at least 3 month expiry date by funding your wallet with any amount";
+    public final static String USED_SAME_CARD = "Oops, it seems you activated the swipe card with a card associated with another user";
+    public final static String CARD_CLEARED = "Fund on the card cleared successfully";
+    public final static String APP_UPDATE_REQUIRED = "Hello, kindly download new version of the application for better performance";
+    public final static String TRANSACTION_DELINED = "Transaction not successful please try again";
+    public final static String MULTIPLE_ACCOUNT_REQUIRED = "Swipe requires you to link more than one separate bank accounts. Please link one more account to get a loan";
+    public final static String CREDIT_REQUEST_NOT_ALLOWED = "You are currently ineligible to get credit because you defaulted on repayment the last time. Contact support on the next steps.";
+    public final static String NOT_QUALIFIED_FOR_CREDIT = "We could not find enough information on the linked account to approve the request. Kindly try another account please";
+    public final static String LOCK_WITHDRAWAL_MESSAGE = "We are sorry, withdrawal from Core Vault is only allow after 3 months";
+    public final static String TARGET_WITHDRAWAL_MESSAGE = "We are sorry, withdrawal from Core Vault is only allow after 1 month";
+    public final static String CORE_WITHDRAWAL_MESSAGE = "Oops, Minimum of one months";
+    public final static String CORE_WITHDRAWAL_NOT_ALLOWED = "We are sorry, withdrawal from Core Vault is only allow after 24hrs";
+    public final static String BEFORE_MATURITY_DATE = "Early withdrawal will attract a 60% charge on the accrued interest. Do you wish to proceed?";
+    public final static String OWNING_CREDIT = "Your outstanding debt will be deducted from the savings. Do you wish to proceed?";
+    public final static String BOTH_MATURITY_AND_CREDIT = "Early withdrawal fee and outstanding debt will be charged from the savings. Proceed?";
+    public final static String CREDIT_LIMIT = "Oops!, you are only eligible to request a credit once in a month";
+    public final static String CREDIT_EXCEEDED = "No vex oo, you have already exceeded the number of requests allowed for the month";
+    public final static String PAY_OUTSTANDING = "Oops!, kindly pay back the oustanding balance of N%.2f before you make another request";
+    public final static String REPAYMENT_SUCCESSFUL = "Great, you have successfully paid your unsettle credit of N%.2f";
+    public final static String SERVICE_KOSI = "Unable to complete request at the moment. Please try again";
+    public final static String APPROVED_AMOUNT = "You are only eligible to get the sum of N%.2f on your card. Do you want us to fund your card with the stated amount?";
+    public final static String SERVICE_NOT_AVAILABLE = "We are sorry, service unavailable. Kindly wait a bit and your card will be activated";
+    public final static String INVALID_REFERENCE_NUMBER = "Invalid reference number. Reference number has been used for a previous transaction";
+    public final static String TOP_UP_NOT_OKAY = "Maximum top up exceeded";
+    public final static String ACTIVE_SAVING_EXCEEDED = "Maximum number of opened vaults exceeded";
+    public final static String TOP_UP_OKAY = "Top up Successful";
+    public final static String RECORD_UPDATED = "Great, your request has been sent. Kindly wait for update on the status of your request";
+    public final static String INVALID_PHONE = "Invalid phone number provided";
+    public final static String INVALID_EMAIL = "Invalid email provided";
+    public final static String INVALID_FILE_SIZE = "Oops!, the file size seems to be too large. Do you mind reducing the size?";
+    public final static String ACCOUNT_ALREADY_LINKED_BY_ANOTHER_USER = "Oops! This bank account has already been linked, please try with another bank account";
+
+    public final static String FAILED = "Failed";
+    public final static String DENIED = "Denied";
+    public final static String PENDING = "Pending";
+    public final static String DELAY_REQUEST = "Hello, due to a system upgrade your credit request cannot be approved at this time. Please try again in a few hours.";
+    public final static String RETRY = "Retry";
+    public final static String SUCCESS = "Success";
+    public final static String DELETED = "Successfully deleted";
+    public final static String UNAUTHORIZED = "unauthorized";
+    public final static Boolean TRUE = true;
+
+    public final static String ACCOUNT_NOT_CONNECTED = "Account not connected";
+    public final static String ACCOUNT_CONNECTED = "Account connected";
+    public final static Boolean FALSE = false;
+    public final static String OUTSTANDING_BALANCE_UNSETTLED = "Hello, your request could not be completed because you still have outstanding balance to settle";
+    public final static String REQUEST_SEND = "Hello, your request has been sent, please hold on..";
+    public final static String LINK_ACCOUNT = "SwipeNG requires you to link your account to enable us determine how much you\n" +
+            "            are qualified for.\n Please link your most active bank account to stand a chance to get a loan";
+    public final static String BVN_REQUIRED = "Great, now kindly verify your BVN and bank details to proceed..";
+    public final static String BVN_NOT_MATCH = "Oops!, the BVN does not match the account provided. Kindly provide a matching BVN and let's get started..";
+    public final static String BVN_BLOCK = "Oops!, it seems your BVN has been blocked by your financial institution. We advise that you contact your financial institution to get this resolved..";
+    public final static String INTERNAL_SERVER_ERROR = SERVICE_KOSI;
+    public final static String INVALID_QUESTION = "Hello, you have chosen an invalid secret question, kindly select from the list. Thank You";
+
+    public final static String PIN_ALREADY_SET = "Hello. You have already set your secret pin. However, feel free to make changes should you wish to. Thank You";
+    public final static String PIN_CHANGED = "Yay! Your transaction PIN has been successfully updated. Now, let's get started..";
+    public final static String PIN_NOT_SET = "Oops!, you are yet to set your transaction PIN. Kindly set your transaction pin to get started..";
+    public final static String INVALID_SEC_ANSWER = "Oops!, wrong security answer. Relax, we are sure you will recall in no time...";
+    public final static String PIN_VERIFIED = "Awesome. Transaction PIN verification has been completed. Now let's get started..";
+    public final static String ENROL_UPDATE = "Biometric created successful";
+    public final static String PIN_VERIFIED_FAILED = "Oops!, invalid transaction PIN. Do you mind trying again?";
+    public final static String BIOMETRIC_EXIST = "Data is already captured";
+    public final static String MERCHANT_NOT_FOUND = "Oops!, merchant verification failed";
+    public final static String INVALID_WALLET = "Oops!, no funds in your wallet. Kindly fund the wallet to get started";
+    public final static String CARD_ACTIVATION_WALLET_FAILED = "Oops!, card activation through wallet channel is temporarily disabled, kindly use your card to make payment";
+    public final static String INVALID_CARD = "Bummer!, you do not have an active card. Kindly activate your card and start swiping!";
+    public final static String CHARGES_TRANSACTION = "Transaction Charges";
+    public final static String CHARGES_CARD_MAINTENANCE = "Card Maintenance";
+    public final static String CHARGES_WITHDRAWAL = "Withdrawal Charges";
+    public final static String CHARGES_WALLET_CASHOUT = "Wallet cash out";
+    public final static String CHARGES_DEFAULT_USER = "Default Charges";
+    public final static String INVALID_EMAIL_PASSWORD = "Either email/password not correct";
+    public final static String DUPLICATE_EMAIL = "Hold up, the email already exists in our account, please use a different email.";
+    public final static String DUPLICATE_PHONE = "Hold up, the phone number already exists in our account, please use a different phone number.";
+    public final static String DUPLICATE_ENTRY = "Hold up, the record already exists. No need to duplicate...";
+    public final static String INVALID_ACCOUNT = "Hold up, the contact you are trying to create exists as a Business account. Please visit https://business.swipe.ng to sign in.";
+    public final static String INVALID_ACCOUNT_ADMINISTRATOR = "Hold up, the contact you are trying to create exists as a Administrator account. Please visit https://administrator.swipe.ng to sign in.";
+    public final static String NIN_ALREADY_EXIST = "Hold up, your NIN already exist in our record. You cannot use one NIN for multiple accounts!";
+    public final static String VOTERS_ALREADY_EXIST = "Hold up, your voters card already exist in our record. You cannot use one voters card for multiple accounts!";
+    public final static String CAC_ALREADY_EXIST = "Hold up, your CAC already exist in our record. You cannot use one CAC for multiple accounts!";
+    public final static String TIN_ALREADY_EXIST = "Hold up, your TIN already exist in our record. You cannot use one TIN for multiple accounts!";
+
+    public final static String WALLET_FUNDED = "Yay! Your wallet has been funded with a sum of N%.2f";
+    public final static String MAX_WITHDRAWAL_EXCEEDED = "Oops, maximum number of free withdrawals exceeded. Do you still want to proceed?. if so, please note that this will attract a fee..";
+    public final static String WITHDRAWAL_NOT_ALLOWED = "Oops! you cannot transfer from this vaults plan, that is only possible on an opened plan.";
+    public final static String WITHDRAWAL_DATE_NOT_REACHED = "Oops!. You cannot initiate a withdrawal on this plan because the minimum date required has not been met. Sincere apologies..";
+    public final static String ACTIVE = "Active";
+    public final static String AUTH_ERROR = "Authentication error";
+    public final static String NOT_ACTIVE = "Closed";
+    public final static String TRANSFER_SUCCESSFUL = "Yay! funds successfully transferred to your wallet";
+    public final static String WITHDRAWAL_NOT_SUCCEED = "Oops! You cannot initiate a withdrawal on this plan";
+    public final static String SWIPE_PAY_ONLY = "Hello, here is a breakdown of your interest rates as it accrued. Feel free to ask us questions if you have any";
+    public final static String SAVED = "Awesome!, your record was saved successfully ";
+    public final static String UPDATED = "Great, your record was updated successfully";
+}

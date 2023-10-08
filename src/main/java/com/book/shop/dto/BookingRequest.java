@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 public class BookingRequest implements Serializable {
 
-    private ServiceType service;
+    private String service;
 
     private String email;
 
