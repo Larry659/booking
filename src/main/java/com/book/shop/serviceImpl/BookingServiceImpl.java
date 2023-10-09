@@ -106,9 +106,37 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public ApiResponse<?>getBookingPerMonth() {
         List<Bookings> bookingsList = bookingRepo.fetchAllBookingsForTheMonth();
-        List<BookingResponse> responseList = Mapper.convertList(bookingsList,BookingResponse.class);
-        return new ApiResponse<>(SUCCESS,OKAY,responseList);
+        if (!bookingsList.isEmpty()){
+            List<BookingResponse> responseList = Mapper.convertList(bookingsList,BookingResponse.class);
+            log.info("This is the list of booking {}",responseList);
+            return new ApiResponse<>(SUCCESS,OKAY,responseList);
+        }
+        else
+            return new ApiResponse<>(FAILED,ERROR_CODE);
     }
+
+    @Override
+    public ApiResponse<?> getBookingCountPerMonth() {
+        List<Bookings> bookingsList = bookingRepo.fetchAllBookingsForTheMonth();
+        if (!bookingsList.isEmpty()){
+           int bookingCountPerMonth = bookingsList.size();
+            return new ApiResponse<>(SUCCESS,OKAY,bookingCountPerMonth);
+        }
+        else
+            return new ApiResponse<>(FAILED,ERROR_CODE);
+    }
+
+    @Override
+    public ApiResponse<?> getBookingCount() {
+        List<Bookings> bookingsList = bookingRepo.findAll();
+        if (!bookingsList.isEmpty()){
+            int bookingCount = bookingsList.size();
+            return new ApiResponse<>(SUCCESS,OKAY,bookingCount);
+        }
+        else
+            return new ApiResponse<>(FAILED,ERROR_CODE);
+    }
+
     private static final Pattern EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public static boolean patternMatches_(String s) {

@@ -34,4 +34,14 @@ public class AccoutRoute {
     ApiResponse<?> deleteAccount(@RequestParam Long id) {
         return accountService.deleteAccount(id);
     }
+
+    @GetMapping("/count")
+    ApiResponse<?> getAccountCount() {
+        return accountService.countAccounts();
+    }
+
+    @GetMapping("/count_month")
+    ApiResponse<?> getAccountCountForMonth() {
+        return accountService.countAccountForMonth();
+    }
 }

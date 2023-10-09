@@ -37,4 +37,14 @@ public class BookingRoute {
     ApiResponse<?> getBookingForThisMonth() {
         return bookingService.getBookingPerMonth();
     }
+
+    @GetMapping("/count")
+    ApiResponse<?> getBookingCount() {
+        return bookingService.getBookingCount();
+    }
+
+    @GetMapping("/count_month")
+    ApiResponse<?> getBookingCountForMonth() {
+        return bookingService.getBookingCountPerMonth();
+    }
 }

@@ -118,4 +118,30 @@ public class AccountServiceImpl implements AccountService {
 //
 
     }
+
+    @Override
+    public ApiResponse<?> countAccounts() {
+        List<Accounts> accountsList = accountRepo.findAll();
+        if(!accountsList.isEmpty()){
+            int totalAccount = accountsList.size();
+            //List<AccountResponse> responseList = AccountConverter.convertToResponseList(accountsList)
+            return new ApiResponse<>(SUCCESS,OKAY,totalAccount);
+
+        }
+        else
+            return new ApiResponse<>(FAILED,ERROR_CODE);
+    }
+
+    @Override
+    public ApiResponse<?> countAccountForMonth() {
+        List<Accounts> accountsList = accountRepo.fetchAllAccountsForMonth();
+        if(!accountsList.isEmpty()){
+            int totalAccount = accountsList.size();
+            //List<AccountResponse> responseList = AccountConverter.convertToResponseList(accountsList)
+            return new ApiResponse<>(SUCCESS,OKAY,totalAccount);
+
+        }
+        else
+            return new ApiResponse<>(FAILED,ERROR_CODE);
+    }
 }

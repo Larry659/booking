@@ -11,4 +11,6 @@ public interface AccountService {
     ApiResponse<?> updatedAccount(Long id, AccountRequest load);
     ApiResponse<?> listAccounts();
     ApiResponse<?> deleteAccount(Long id);
+    ApiResponse<?> countAccounts();
+    ApiResponse<?> countAccountForMonth();
 }

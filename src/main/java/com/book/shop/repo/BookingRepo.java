@@ -12,7 +12,7 @@ public interface BookingRepo extends JpaRepository< Bookings,Long> {
    //@Query( value = "select st from Bookings  st where month(st.appointmentDate)=:month")
 
     //@Query( value = "select * from booking where month(appointment_date)=:month(current_date())",nativeQuery = true)
-    @Query(value = "SELECT * FROM booking WHERE MONTH(appointment_date) =:MONTH(CURRENT_DATE())", nativeQuery = true)
+    @Query(value = "SELECT * FROM booking WHERE MONTH(appointment_date) =MONTH(CURRENT_DATE())", nativeQuery = true)
 
     List<Bookings> fetchAllBookingsForTheMonth();
 }

@@ -13,4 +13,7 @@ public interface BookingService {
 
     ApiResponse<?> getBookingPerMonth();
 
+    ApiResponse<?> getBookingCountPerMonth();
+    ApiResponse<?> getBookingCount();
+
 }
