@@ -1,7 +1,7 @@
 package com.book.shop.config;
 
 
-import jakarta.servlet.Filter;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +43,7 @@ public class SecurityConfiguration {
 
          .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**","/api/v1/account/**","/api/v1/booking/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**","/api/v1/account/**","/api/v1/booking/**","/api/v1/dashboard/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
