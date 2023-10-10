@@ -4,7 +4,6 @@ import com.book.shop.dto.ApiResponse;
 import com.book.shop.dto.BookingRequest;
 import com.book.shop.service.BookingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

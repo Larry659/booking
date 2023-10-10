@@ -19,7 +19,7 @@ public class DashboardRoute {
 //    ResponseEntity addAccount(@RequestBody AccountRequest payload) {
 //        return accountService.createAccount(payload);
 //    }
-    @GetMapping ("/card_values")
+    @GetMapping ("")
     ApiResponse<?> getDashboardValues() {
         return dashService.getDashCardValues();
     }

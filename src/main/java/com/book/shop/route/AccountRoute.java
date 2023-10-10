@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 
-@RequestMapping(value ="/api/v1/account")
+@RequestMapping(value ="/api/v1/accounts")
 
 @RequiredArgsConstructor
 public class AccountRoute {
@@ -19,17 +19,17 @@ public class AccountRoute {
 //    ResponseEntity addAccount(@RequestBody AccountRequest payload) {
 //        return accountService.createAccount(payload);
 //    }
-    @PostMapping("/update")
-    ApiResponse<?> updateAccount(@RequestParam Long id, @RequestBody AccountRequest payload) {
+    @PostMapping("/{id}")
+    ApiResponse<?> updateAccount(@PathVariable Long id, @RequestBody AccountRequest payload) {
         return accountService.updatedAccount(id,payload);
     }
-    @GetMapping("/fetch")
+    @GetMapping("")
     ApiResponse<?> getAccount() {
 
         return accountService.listAccounts();
     }
-    @DeleteMapping("/delete")
-    ApiResponse<?> deleteAccount(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    ApiResponse<?> deleteAccount(@PathVariable Long id) {
         return accountService.deleteAccount(id);
     }
 
@@ -38,7 +38,7 @@ public class AccountRoute {
         return accountService.countAccounts();
     }
 
-    @GetMapping("/count_month")
+    @GetMapping("/month")
     ApiResponse<?> getAccountCountForMonth() {
         return accountService.countAccountForMonth();
     }
